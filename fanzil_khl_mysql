@@ -1,0 +1,876 @@
+-- MySQL dump 10.17  Distrib 10.3.23-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: fanzil
+-- ------------------------------------------------------
+-- Server version	10.3.23-MariaDB-0+deb10u1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Balls`
+--
+
+DROP TABLE IF EXISTS `Balls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Balls` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_STUDENT` int(11) NOT NULL,
+  `ID_DISCIPLINE` int(11) NOT NULL,
+  `ID_BAll` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ID_STUDENT` (`ID_STUDENT`),
+  KEY `ID_DISCIPLINE` (`ID_DISCIPLINE`),
+  CONSTRAINT `Balls_ibfk_1` FOREIGN KEY (`ID_STUDENT`) REFERENCES `STUDENTS` (`ID`),
+  CONSTRAINT `Balls_ibfk_2` FOREIGN KEY (`ID_DISCIPLINE`) REFERENCES `Discipline` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Balls`
+--
+
+LOCK TABLES `Balls` WRITE;
+/*!40000 ALTER TABLE `Balls` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Balls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `City`
+--
+
+DROP TABLE IF EXISTS `City`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `City` (
+  `ID` int(11) NOT NULL,
+  `City` varchar(30) NOT NULL,
+  `Country` varchar(30) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `City`
+--
+
+LOCK TABLES `City` WRITE;
+/*!40000 ALTER TABLE `City` DISABLE KEYS */;
+INSERT INTO `City` VALUES (1,'Moscow','Russia'),(2,'Saint Petersburg','Russia'),(3,'Riga','Latvia'),(4,'Helsinki','Finland'),(5,'Cherepovets','Russia'),(6,'Podolsk','Russia'),(7,'Minsk','Byelorussia'),(8,'Yaroslavl','Russia'),(9,'Sochi','Russia'),(10,'Nizhny Novgorod','Russia'),(11,'Yekaterinburg','Russia'),(12,'Kazan','Russia'),(13,'Magnitogorsk','Russia'),(14,'Nizhnekamsk','Russia'),(15,'Novosibirsk','Russia'),(16,'Chelyabinsk','Russia'),(17,'Omsk','Russia'),(18,'Vladivostok','Russia'),(19,'Khabarovsk','Russia'),(20,'Nursultan','Kazakhstan'),(21,'Pekin','China'),(22,'Ufa','Russia');
+/*!40000 ALTER TABLE `City` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Coach`
+--
+
+DROP TABLE IF EXISTS `Coach`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Coach` (
+  `ID_Coach` int(11) NOT NULL,
+  `Team_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_Coach`),
+  KEY `Team_ID` (`Team_ID`),
+  CONSTRAINT `Coach_ibfk_1` FOREIGN KEY (`ID_Coach`) REFERENCES `People` (`ID_People`),
+  CONSTRAINT `Coach_ibfk_2` FOREIGN KEY (`Team_ID`) REFERENCES `Teams` (`ID_TEAM`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Coach`
+--
+
+LOCK TABLES `Coach` WRITE;
+/*!40000 ALTER TABLE `Coach` DISABLE KEYS */;
+INSERT INTO `Coach` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),(19,19),(20,20),(21,21),(22,22),(23,23),(24,24);
+/*!40000 ALTER TABLE `Coach` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Discipline`
+--
+
+DROP TABLE IF EXISTS `Discipline`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Discipline` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  `semectr` int(11) NOT NULL,
+  `hour` int(11) NOT NULL,
+  `form_discipline` varchar(40) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Discipline`
+--
+
+LOCK TABLES `Discipline` WRITE;
+/*!40000 ALTER TABLE `Discipline` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Discipline` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Division`
+--
+
+DROP TABLE IF EXISTS `Division`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Division` (
+  `Division_name` varchar(30) NOT NULL,
+  `Conference_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`Division_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Division`
+--
+
+LOCK TABLES `Division` WRITE;
+/*!40000 ALTER TABLE `Division` DISABLE KEYS */;
+INSERT INTO `Division` VALUES ('Bobrov','West'),('Chernyshev','East'),('Kharlamov','East'),('Tarasov','West');
+/*!40000 ALTER TABLE `Division` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Match_General_information`
+--
+
+DROP TABLE IF EXISTS `Match_General_information`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Match_General_information` (
+  `ID_Match` int(11) NOT NULL,
+  `ID_TEAM1` int(11) NOT NULL,
+  `ID_TEAM2` int(11) NOT NULL,
+  `ID_City` int(11) NOT NULL,
+  `Auditorium` int(11) DEFAULT NULL,
+  `Date_Match` date DEFAULT NULL,
+  `GOALS_TEAM1` int(11) DEFAULT NULL,
+  `GOALS_TEAM2` int(11) DEFAULT NULL,
+  `MATCH_END` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`ID_Match`),
+  KEY `ID_TEAM1` (`ID_TEAM1`),
+  KEY `ID_TEAM2` (`ID_TEAM2`),
+  KEY `ID_City` (`ID_City`),
+  CONSTRAINT `Match_General_information_ibfk_1` FOREIGN KEY (`ID_TEAM1`) REFERENCES `Teams` (`ID_TEAM`),
+  CONSTRAINT `Match_General_information_ibfk_2` FOREIGN KEY (`ID_TEAM2`) REFERENCES `Teams` (`ID_TEAM`),
+  CONSTRAINT `Match_General_information_ibfk_3` FOREIGN KEY (`ID_City`) REFERENCES `City` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Match_General_information`
+--
+
+LOCK TABLES `Match_General_information` WRITE;
+/*!40000 ALTER TABLE `Match_General_information` DISABLE KEYS */;
+INSERT INTO `Match_General_information` VALUES (1,20,21,18,6544,'2019-12-17',5,2,'OC'),(2,14,20,12,7990,'2019-12-19',3,0,'OC'),(3,11,1,1,8566,'2019-12-18',3,2,'OT'),(4,14,12,12,7800,'2019-12-17',6,5,'OC'),(5,12,1,1,7566,'2019-12-16',3,2,'SO');
+/*!40000 ALTER TABLE `Match_General_information` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `People`
+--
+
+DROP TABLE IF EXISTS `People`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `People` (
+  `ID_People` int(11) NOT NULL,
+  `Surnname` varchar(30) NOT NULL,
+  `First_name` varchar(30) NOT NULL,
+  `Patronymic` varchar(30) DEFAULT NULL,
+  `BirthDate` date NOT NULL,
+  `BirthPlace` varchar(30) DEFAULT NULL,
+  `Сitizenship` varchar(30) NOT NULL,
+  PRIMARY KEY (`ID_People`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `People`
+--
+
+LOCK TABLES `People` WRITE;
+/*!40000 ALTER TABLE `People` DISABLE KEYS */;
+INSERT INTO `People` VALUES (1,'Krikunov','Vladimir','Vasilevich','1950-04-23','Kirovo-Chepetsk','Russia'),(2,'Ģirts','Ankipans',NULL,'1975-11-29','Riga','Latvia'),(3,'Marjamäki','Lauri',NULL,'1977-05-29',NULL,'Finland'),(4,'Razin','Andrei','Vladimirovich','1973-10-23','Tolyatti','Russia'),(5,'Kudashov',' Alexei','Nikolaevich','1971-07-21','Moscow','Russia'),(6,'Znaroks','Olegs','Valerievich','1963-01-02','Chelyabinsk',' Latvia '),(7,'Kravets','Mikhail','Grigorevich','1963-11-12','Saint Petersburg','Russia'),(8,'Woodcroft','Craig',NULL,'1969-12-03','Toronto','Canada'),(9,'Pelino','Mike','Michael','1959-11-13','Ontario','Canada'),(10,'Nemirovsky','David',NULL,'1976-08-01','Toronto','Canada'),(11,'Andrijevsky','Alexander','Leonidovich','1968-08-10','Minsk','Belorussia'),(12,'Nikitin','Igor','Valeryevich','1973-03-23','Kamennogorsk','Kazakhstan'),(13,'Martemyanov','Andrei','Alekseevich','1963-03-30','Sverdlovsc','Russia'),(14,'Kvartalnov','Dmitry','Vyacheslavovich','1966-03-25','Moscow','Russia'),(15,'Vorobyov','Ilya','Petrovich','1975-03-16','Riga','Germany'),(16,'Butsayev','Vyacheslav','Gennadievich','1970-06-13','Tolyatti','Russia'),(17,'Zavarukhin ','Nikolai','Zavaryhin','1975-03-18','Ufa','Russia'),(18,'Yurzinov','Vladimir','Vladimirovich','1940-02-20','Moscow','Russia'),(19,'Hartley','Bob',NULL,'1960-09-07','Ontario','Canada'),(20,'Svetlov','Sergei','Aleksandrovich','1961-01-17','Penza','Russia'),(21,'Gulyavtsev','Alexander','Vyacheslavovich','1973-05-03','Perm','Russia'),(22,'Skabelka','Andrei','Vladimirovich','1971-01-20','Minsk','Belorussia'),(23,'Fraser','Curt',NULL,'1958-01-12','Ogaio','Canada'),(24,'Tsulygin','Nikolai','Leonidovich','1975-05-29','Ufa','Russia'),(25,'Justin','Azevedo',NULL,'1988-04-01','Yesr-Lorn','Canada'),(26,'Bilyalov','Timur',NULL,'1995-03-28','Kazan','Russia'),(27,'Cormier','Patrice',NULL,'1990-06-14','New Brunswick','Canada'),(28,'Dynyak','Nikita',NULL,'1997-08-06','Saint-Petersburg','Russia'),(29,'Fazylzyanov','Kamil',NULL,'1997-10-31','Kazan','Russia'),(30,'Matthew','Frattin',NULL,'1988-01-03','Edmonton','Canada'),(31,'Galimov','Artyom',NULL,'1999-09-08',NULL,'Russia'),(32,'Galimov','Emil',NULL,'1992-05-09','Nizhnekamsk','Russia'),(33,'Galiyev','Stanislav','Sergeevich','1992-01-17','Moscow','Russia'),(34,'Glukhov','Mikhail','Sergeevich','1988-05-13','Orsc','Russia'),(35,'Kara','Vladislav',NULL,'1998-04-20','Salehard','Russia'),(36,'Lyamkin','Nikita',NULL,'1996-02-06','Novokuznetsk','Russia'),(37,'Reideborn','Adam',NULL,'1992-01-18','Stockholm','Sweden'),(38,'Zaripov','Danis','Zinnurovich','1981-03-26','Chelyabinsk','Russia'),(39,'Petrov','Alexandr',NULL,'1983-02-11','Moscow','Russia'),(40,'Alexandrov','Misha',NULL,'1989-03-12','Kazan','Russia'),(41,'Viksen','Bobi',NULL,'1986-03-16','Toronto','Canada'),(42,'Kisnov','Marli',NULL,'1987-02-13','Sidney','USA'),(43,'Alexandr','Ovechkin',NULL,'1989-04-13','Moscow','Russia'),(44,'Shipascov','Vadim',NULL,'1998-03-13','Saint-Petersburg','Russia'),(45,'Larsen','Filip',NULL,'1987-04-23','Kongo','Finland'),(46,'Li','Stan',NULL,'1976-02-13','Las-vegas','USA'),(47,'Li','Oleg',NULL,'1999-03-12','Novosibirsk','Russia'),(48,'Petrov','Grisha',NULL,'1986-02-13','Ufa','Russia'),(49,'Omark','Linus',NULL,'1989-02-11','Övertorneå','Sweden'),(50,'Kaprizov','Kirill',NULL,'1997-02-12','Novokuznesk','Russia');
+/*!40000 ALTER TABLE `People` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `Player_ALL_STAT`
+--
+
+DROP TABLE IF EXISTS `Player_ALL_STAT`;
+/*!50001 DROP VIEW IF EXISTS `Player_ALL_STAT`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `Player_ALL_STAT` (
+  `ID_People` tinyint NOT NULL,
+  `Surnname` tinyint NOT NULL,
+  `First_name` tinyint NOT NULL,
+  `Assistant` tinyint NOT NULL,
+  `Goals` tinyint NOT NULL,
+  `Points` tinyint NOT NULL,
+  `sum(Missed_shots)` tinyint NOT NULL,
+  `sum(Blocked_shots)` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `Players`
+--
+
+DROP TABLE IF EXISTS `Players`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Players` (
+  `ID_Players` int(11) NOT NULL,
+  `Growth` int(11) NOT NULL,
+  `Weight` int(11) NOT NULL,
+  `Position` varchar(30) DEFAULT NULL,
+  `Team_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_Players`),
+  KEY `Team_ID` (`Team_ID`),
+  CONSTRAINT `Players_ibfk_1` FOREIGN KEY (`ID_Players`) REFERENCES `People` (`ID_People`),
+  CONSTRAINT `Players_ibfk_2` FOREIGN KEY (`Team_ID`) REFERENCES `Teams` (`ID_TEAM`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Players`
+--
+
+LOCK TABLES `Players` WRITE;
+/*!40000 ALTER TABLE `Players` DISABLE KEYS */;
+INSERT INTO `Players` VALUES (25,170,76,'forward',14),(26,179,79,'goaltender',14),(27,188,98,'forward',14),(28,182,83,'forward',14),(29,186,100,'defense',14),(30,183,93,'forward',14),(31,180,80,'forward',14),(32,187,84,'forward',14),(33,186,88,'forward',14),(34,189,92,'forward',14),(35,186,89,'forward',14),(36,196,97,'defense',14),(37,184,81,'goaltender',14),(38,184,89,'forward',14),(39,182,87,'forward',12),(40,198,87,'defense',12),(41,176,84,'forward',12),(43,183,99,'goaltender',12),(44,183,84,'forward',1),(45,188,76,'forward',24),(46,187,88,'defense',1),(47,188,78,'forward',12),(48,195,100,'defense',12),(49,183,87,'forward',24),(50,183,85,'forward',12);
+/*!40000 ALTER TABLE `Players` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `Players_INFO`
+--
+
+DROP TABLE IF EXISTS `Players_INFO`;
+/*!50001 DROP VIEW IF EXISTS `Players_INFO`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `Players_INFO` (
+  `ID_Players` tinyint NOT NULL,
+  `Surnname` tinyint NOT NULL,
+  `First_name` tinyint NOT NULL,
+  `Growth` tinyint NOT NULL,
+  `Weight` tinyint NOT NULL,
+  `BirthDate` tinyint NOT NULL,
+  `Сitizenship` tinyint NOT NULL,
+  `Team` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `Players_stat_match`
+--
+
+DROP TABLE IF EXISTS `Players_stat_match`;
+/*!50001 DROP VIEW IF EXISTS `Players_stat_match`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `Players_stat_match` (
+  `ID_Match` tinyint NOT NULL,
+  `ID_People` tinyint NOT NULL,
+  `Surnname` tinyint NOT NULL,
+  `First_name` tinyint NOT NULL,
+  `Assistant` tinyint NOT NULL,
+  `Goals` tinyint NOT NULL,
+  `Blocked_shots` tinyint NOT NULL,
+  `Missed_shots` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `Position_teams`
+--
+
+DROP TABLE IF EXISTS `Position_teams`;
+/*!50001 DROP VIEW IF EXISTS `Position_teams`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `Position_teams` (
+  `num` tinyint NOT NULL,
+  `id_TEAM` tinyint NOT NULL,
+  `Team_name` tinyint NOT NULL,
+  `Points` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `STUDENTS`
+--
+
+DROP TABLE IF EXISTS `STUDENTS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `STUDENTS` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `FAMILIY` varchar(20) NOT NULL,
+  `NAME` varchar(20) NOT NULL,
+  `FATHERNAME` varchar(20) NOT NULL,
+  `Date_Bithday` date DEFAULT NULL,
+  `Sex` varchar(20) NOT NULL,
+  `Student_group` varchar(20) NOT NULL,
+  `Date_Lerning_Start` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `STUDENTS`
+--
+
+LOCK TABLES `STUDENTS` WRITE;
+/*!40000 ALTER TABLE `STUDENTS` DISABLE KEYS */;
+/*!40000 ALTER TABLE `STUDENTS` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Stat_Player`
+--
+
+DROP TABLE IF EXISTS `Stat_Player`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Stat_Player` (
+  `ID_Match` int(11) NOT NULL,
+  `ID_Player` int(11) NOT NULL,
+  `Assistant` int(11) DEFAULT 0,
+  `Goals` int(11) DEFAULT 0,
+  `Blocked_shots` int(11) DEFAULT 0,
+  `Missed_shots` int(11) DEFAULT 0,
+  PRIMARY KEY (`ID_Match`,`ID_Player`),
+  KEY `ID_Player` (`ID_Player`),
+  CONSTRAINT `Stat_Player_ibfk_1` FOREIGN KEY (`ID_Player`) REFERENCES `Players` (`ID_Players`),
+  CONSTRAINT `Stat_Player_ibfk_2` FOREIGN KEY (`ID_Match`) REFERENCES `Match_General_information` (`ID_Match`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Stat_Player`
+--
+
+LOCK TABLES `Stat_Player` WRITE;
+/*!40000 ALTER TABLE `Stat_Player` DISABLE KEYS */;
+INSERT INTO `Stat_Player` VALUES (2,26,0,0,23,0),(2,38,2,3,4,0),(4,25,2,2,13,0),(4,26,1,0,37,5),(4,27,2,2,7,0),(4,35,1,1,0,0),(4,38,1,0,2,0);
+/*!40000 ALTER TABLE `Stat_Player` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Teams`
+--
+
+DROP TABLE IF EXISTS `Teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Teams` (
+  `ID_TEAM` int(11) NOT NULL,
+  `Team_name` varchar(30) NOT NULL,
+  `City_ID` int(11) NOT NULL,
+  `Division` varchar(30) NOT NULL,
+  PRIMARY KEY (`ID_TEAM`),
+  KEY `Division` (`Division`),
+  KEY `City_ID` (`City_ID`),
+  CONSTRAINT `Teams_ibfk_1` FOREIGN KEY (`Division`) REFERENCES `Division` (`Division_name`),
+  CONSTRAINT `Teams_ibfk_2` FOREIGN KEY (`City_ID`) REFERENCES `City` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Teams`
+--
+
+LOCK TABLES `Teams` WRITE;
+/*!40000 ALTER TABLE `Teams` DISABLE KEYS */;
+INSERT INTO `Teams` VALUES (1,'Dynamo',1,'Bobrov'),(2,'Dinamo',3,'Bobrov'),(3,'Jokerit',4,'Bobrov'),(4,'Severstal',5,'Bobrov'),(5,'SKA',2,'Bobrov'),(6,'Spartak',1,'Bobrov'),(7,'Vityaz',1,'Tarasov'),(8,'Dinamo',7,'Tarasov'),(9,'Lokomotiv',8,'Tarasov'),(10,'Torpedo',10,'Tarasov'),(11,'HC Sochi',9,'Tarasov'),(12,'CSKA',1,'Tarasov'),(13,'Avtomobilist',11,'Kharlamov'),(14,'Ak Bars',12,'Kharlamov'),(15,'Metallurg',13,'Kharlamov'),(16,'Neftekhimik',14,'Kharlamov'),(17,'Sibir',15,'Kharlamov'),(18,'Traktor',16,'Kharlamov'),(19,'Avangard',17,'Chernyshev'),(20,'Admiral',18,'Chernyshev'),(21,'Amur',19,'Chernyshev'),(22,'Barys',20,'Chernyshev'),(23,'Kunlun Red Star',21,'Chernyshev'),(24,'Salavat Yulaev',22,'Chernyshev');
+/*!40000 ALTER TABLE `Teams` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `Teams_GENERIC_INFO`
+--
+
+DROP TABLE IF EXISTS `Teams_GENERIC_INFO`;
+/*!50001 DROP VIEW IF EXISTS `Teams_GENERIC_INFO`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `Teams_GENERIC_INFO` (
+  `ID_View_Teams_Generic` tinyint NOT NULL,
+  `Team_name` tinyint NOT NULL,
+  `City` tinyint NOT NULL,
+  `Division` tinyint NOT NULL,
+  `Conference_name` tinyint NOT NULL,
+  `Main_Coach` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `Teams_Points_match`
+--
+
+DROP TABLE IF EXISTS `Teams_Points_match`;
+/*!50001 DROP VIEW IF EXISTS `Teams_Points_match`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `Teams_Points_match` (
+  `ID_Match` tinyint NOT NULL,
+  `ID_TEAM1` tinyint NOT NULL,
+  `Point` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `five`
+--
+
+DROP TABLE IF EXISTS `five`;
+/*!50001 DROP VIEW IF EXISTS `five`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `five` (
+  `ID_Match` tinyint NOT NULL,
+  `ID_TEAM1` tinyint NOT NULL,
+  `Point` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `four`
+--
+
+DROP TABLE IF EXISTS `four`;
+/*!50001 DROP VIEW IF EXISTS `four`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `four` (
+  `ID_Match` tinyint NOT NULL,
+  `ID_TEAM1` tinyint NOT NULL,
+  `Point` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `one`
+--
+
+DROP TABLE IF EXISTS `one`;
+/*!50001 DROP VIEW IF EXISTS `one`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `one` (
+  `ID_Match` tinyint NOT NULL,
+  `ID_TEAM1` tinyint NOT NULL,
+  `Point` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `six`
+--
+
+DROP TABLE IF EXISTS `six`;
+/*!50001 DROP VIEW IF EXISTS `six`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `six` (
+  `ID_Match` tinyint NOT NULL,
+  `ID_TEAM2` tinyint NOT NULL,
+  `Point` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `three`
+--
+
+DROP TABLE IF EXISTS `three`;
+/*!50001 DROP VIEW IF EXISTS `three`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `three` (
+  `ID_Match` tinyint NOT NULL,
+  `ID_TEAM2` tinyint NOT NULL,
+  `Point` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `two`
+--
+
+DROP TABLE IF EXISTS `two`;
+/*!50001 DROP VIEW IF EXISTS `two`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `two` (
+  `ID_Match` tinyint NOT NULL,
+  `ID_TEAM2` tinyint NOT NULL,
+  `Point` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `user13_players_west`
+--
+
+DROP TABLE IF EXISTS `user13_players_west`;
+/*!50001 DROP VIEW IF EXISTS `user13_players_west`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `user13_players_west` (
+  `Surnname` tinyint NOT NULL,
+  `First_name` tinyint NOT NULL,
+  `Patronymic` tinyint NOT NULL,
+  `Conference_name` tinyint NOT NULL,
+  `Team_name` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `user27`
+--
+
+DROP TABLE IF EXISTS `user27`;
+/*!50001 DROP VIEW IF EXISTS `user27`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `user27` (
+  `Conference_name` tinyint NOT NULL,
+  `Division_name` tinyint NOT NULL,
+  `Team_name` tinyint NOT NULL,
+  `ID_Players` tinyint NOT NULL,
+  `Growth` tinyint NOT NULL,
+  `Weight` tinyint NOT NULL,
+  `Position` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `user30`
+--
+
+DROP TABLE IF EXISTS `user30`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user30` (
+  `Division_name` tinyint(4) NOT NULL,
+  `Conference_name` tinyint(4) NOT NULL,
+  `ID_TEAM` tinyint(4) NOT NULL,
+  `Team_name` tinyint(4) NOT NULL,
+  `City_ID` tinyint(4) NOT NULL,
+  `Division` tinyint(4) NOT NULL,
+  `ID_Players` tinyint(4) NOT NULL,
+  `Growth` tinyint(4) NOT NULL,
+  `Weight` tinyint(4) NOT NULL,
+  `Position` tinyint(4) NOT NULL,
+  `Team_ID` tinyint(4) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user30`
+--
+
+LOCK TABLES `user30` WRITE;
+/*!40000 ALTER TABLE `user30` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user30` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Final view structure for view `Player_ALL_STAT`
+--
+
+/*!50001 DROP TABLE IF EXISTS `Player_ALL_STAT`*/;
+/*!50001 DROP VIEW IF EXISTS `Player_ALL_STAT`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Player_ALL_STAT` AS select `Players_stat_match`.`ID_People` AS `ID_People`,`Players_stat_match`.`Surnname` AS `Surnname`,`Players_stat_match`.`First_name` AS `First_name`,sum(`Players_stat_match`.`Assistant`) AS `Assistant`,sum(`Players_stat_match`.`Goals`) AS `Goals`,sum(`Players_stat_match`.`Assistant`) + sum(`Players_stat_match`.`Goals`) AS `Points`,sum(`Players_stat_match`.`Missed_shots`) AS `sum(Missed_shots)`,sum(`Players_stat_match`.`Blocked_shots`) AS `sum(Blocked_shots)` from `Players_stat_match` group by `Players_stat_match`.`ID_People` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `Players_INFO`
+--
+
+/*!50001 DROP TABLE IF EXISTS `Players_INFO`*/;
+/*!50001 DROP VIEW IF EXISTS `Players_INFO`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Players_INFO` AS select `Players`.`ID_Players` AS `ID_Players`,`People`.`Surnname` AS `Surnname`,`People`.`First_name` AS `First_name`,`Players`.`Growth` AS `Growth`,`Players`.`Weight` AS `Weight`,`People`.`BirthDate` AS `BirthDate`,`People`.`Сitizenship` AS `Сitizenship`,`Teams`.`Team_name` AS `Team` from ((`People` join `Players` on(`Players`.`ID_Players` = `People`.`ID_People`)) join `Teams` on(`Players`.`Team_ID` = `Teams`.`ID_TEAM`)) group by `People`.`Surnname` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `Players_stat_match`
+--
+
+/*!50001 DROP TABLE IF EXISTS `Players_stat_match`*/;
+/*!50001 DROP VIEW IF EXISTS `Players_stat_match`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Players_stat_match` AS select `Stat_Player`.`ID_Match` AS `ID_Match`,`People`.`ID_People` AS `ID_People`,`People`.`Surnname` AS `Surnname`,`People`.`First_name` AS `First_name`,`Stat_Player`.`Assistant` AS `Assistant`,`Stat_Player`.`Goals` AS `Goals`,`Stat_Player`.`Blocked_shots` AS `Blocked_shots`,`Stat_Player`.`Missed_shots` AS `Missed_shots` from ((`People` join `Players` on(`Players`.`ID_Players` = `People`.`ID_People`)) join `Stat_Player` on(`Stat_Player`.`ID_Player` = `People`.`ID_People`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `Position_teams`
+--
+
+/*!50001 DROP TABLE IF EXISTS `Position_teams`*/;
+/*!50001 DROP VIEW IF EXISTS `Position_teams`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Position_teams` AS select row_number() over ( order by sum(`Teams_Points_match`.`Point`) desc) AS `num`,`Teams_Points_match`.`ID_TEAM1` AS `id_TEAM`,`Teams`.`Team_name` AS `Team_name`,sum(`Teams_Points_match`.`Point`) AS `Points` from (`Teams_Points_match` join `Teams` on(`Teams_Points_match`.`ID_TEAM1` = `Teams`.`ID_TEAM`)) group by `Teams_Points_match`.`ID_TEAM1` order by sum(`Teams_Points_match`.`Point`) desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `Teams_GENERIC_INFO`
+--
+
+/*!50001 DROP TABLE IF EXISTS `Teams_GENERIC_INFO`*/;
+/*!50001 DROP VIEW IF EXISTS `Teams_GENERIC_INFO`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Teams_GENERIC_INFO` AS select `Teams`.`ID_TEAM` AS `ID_View_Teams_Generic`,`Teams`.`Team_name` AS `Team_name`,`City`.`City` AS `City`,`Teams`.`Division` AS `Division`,`Division`.`Conference_name` AS `Conference_name`,concat(`People`.`Surnname`,' ',`People`.`First_name`) AS `Main_Coach` from ((((`Coach` join `Teams` on(`Coach`.`Team_ID` = `Teams`.`ID_TEAM`)) join `People` on(`People`.`ID_People` = `Coach`.`ID_Coach`)) join `City` on(`City`.`ID` = `Teams`.`City_ID`)) join `Division` on(`Division`.`Division_name` = `Teams`.`Division`)) group by `Teams`.`Team_name` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `Teams_Points_match`
+--
+
+/*!50001 DROP TABLE IF EXISTS `Teams_Points_match`*/;
+/*!50001 DROP VIEW IF EXISTS `Teams_Points_match`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Teams_Points_match` AS select `one`.`ID_Match` AS `ID_Match`,`one`.`ID_TEAM1` AS `ID_TEAM1`,`one`.`Point` AS `Point` from `one` union select `two`.`ID_Match` AS `ID_Match`,`two`.`ID_TEAM2` AS `ID_TEAM2`,`two`.`Point` AS `Point` from `two` union select `three`.`ID_Match` AS `ID_Match`,`three`.`ID_TEAM2` AS `ID_TEAM2`,`three`.`Point` AS `Point` from `three` union select `four`.`ID_Match` AS `ID_Match`,`four`.`ID_TEAM1` AS `ID_TEAM1`,`four`.`Point` AS `Point` from `four` union select `five`.`ID_Match` AS `ID_Match`,`five`.`ID_TEAM1` AS `ID_TEAM1`,`five`.`Point` AS `Point` from `five` union select `six`.`ID_Match` AS `ID_Match`,`six`.`ID_TEAM2` AS `ID_TEAM2`,`six`.`Point` AS `Point` from `six` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `five`
+--
+
+/*!50001 DROP TABLE IF EXISTS `five`*/;
+/*!50001 DROP VIEW IF EXISTS `five`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `five` AS select `Match_General_information`.`ID_Match` AS `ID_Match`,`Match_General_information`.`ID_TEAM1` AS `ID_TEAM1`,0 AS `Point` from `Match_General_information` where `Match_General_information`.`GOALS_TEAM1` < `Match_General_information`.`GOALS_TEAM2` and `Match_General_information`.`MATCH_END` = 'OC' */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `four`
+--
+
+/*!50001 DROP TABLE IF EXISTS `four`*/;
+/*!50001 DROP VIEW IF EXISTS `four`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `four` AS select `Match_General_information`.`ID_Match` AS `ID_Match`,`Match_General_information`.`ID_TEAM1` AS `ID_TEAM1`,1 AS `Point` from `Match_General_information` where `Match_General_information`.`GOALS_TEAM1` < `Match_General_information`.`GOALS_TEAM2` and `Match_General_information`.`MATCH_END` in ('OT','SO') */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `one`
+--
+
+/*!50001 DROP TABLE IF EXISTS `one`*/;
+/*!50001 DROP VIEW IF EXISTS `one`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `one` AS select `Match_General_information`.`ID_Match` AS `ID_Match`,`Match_General_information`.`ID_TEAM1` AS `ID_TEAM1`,2 AS `Point` from `Match_General_information` where `Match_General_information`.`GOALS_TEAM1` > `Match_General_information`.`GOALS_TEAM2` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `six`
+--
+
+/*!50001 DROP TABLE IF EXISTS `six`*/;
+/*!50001 DROP VIEW IF EXISTS `six`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `six` AS select `Match_General_information`.`ID_Match` AS `ID_Match`,`Match_General_information`.`ID_TEAM2` AS `ID_TEAM2`,0 AS `Point` from `Match_General_information` where `Match_General_information`.`GOALS_TEAM1` > `Match_General_information`.`GOALS_TEAM2` and `Match_General_information`.`MATCH_END` = 'OC' */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `three`
+--
+
+/*!50001 DROP TABLE IF EXISTS `three`*/;
+/*!50001 DROP VIEW IF EXISTS `three`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `three` AS select `Match_General_information`.`ID_Match` AS `ID_Match`,`Match_General_information`.`ID_TEAM2` AS `ID_TEAM2`,2 AS `Point` from `Match_General_information` where `Match_General_information`.`GOALS_TEAM1` < `Match_General_information`.`GOALS_TEAM2` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `two`
+--
+
+/*!50001 DROP TABLE IF EXISTS `two`*/;
+/*!50001 DROP VIEW IF EXISTS `two`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`fanzil`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `two` AS select `Match_General_information`.`ID_Match` AS `ID_Match`,`Match_General_information`.`ID_TEAM2` AS `ID_TEAM2`,1 AS `Point` from `Match_General_information` where `Match_General_information`.`GOALS_TEAM1` > `Match_General_information`.`GOALS_TEAM2` and `Match_General_information`.`MATCH_END` in ('OT','SO') */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `user13_players_west`
+--
+
+/*!50001 DROP TABLE IF EXISTS `user13_players_west`*/;
+/*!50001 DROP VIEW IF EXISTS `user13_players_west`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`user13`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `user13_players_west` AS select `People`.`Surnname` AS `Surnname`,`People`.`First_name` AS `First_name`,`People`.`Patronymic` AS `Patronymic`,`Division`.`Conference_name` AS `Conference_name`,`Teams`.`Team_name` AS `Team_name` from (((`People` join `Division`) join `Teams`) join `Players`) where `Players`.`ID_Players` = `People`.`ID_People` and `Teams`.`Division` = `Division`.`Division_name` and `Players`.`Team_ID` = `Teams`.`ID_TEAM` and `Division`.`Conference_name` = 'West' */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `user27`
+--
+
+/*!50001 DROP TABLE IF EXISTS `user27`*/;
+/*!50001 DROP VIEW IF EXISTS `user27`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`user27`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `user27` AS select `Division`.`Conference_name` AS `Conference_name`,`Division`.`Division_name` AS `Division_name`,`Teams`.`Team_name` AS `Team_name`,`Players`.`ID_Players` AS `ID_Players`,`Players`.`Growth` AS `Growth`,`Players`.`Weight` AS `Weight`,`Players`.`Position` AS `Position` from ((`Division` join `Teams`) join `Players`) where `Division`.`Division_name` = `Teams`.`Division` and `Teams`.`ID_TEAM` = `Players`.`Team_ID` and `Players`.`Position` = 'forward' and `Division`.`Conference_name` = 'West' */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-08-27 12:44:09
